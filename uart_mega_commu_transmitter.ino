@@ -19,3 +19,8 @@ void loop(){
   }  
   delay(1000);
 }
+
+//when we use serial communication 
+//remember TX,RX -> serial1
+//TX1,RX1 -> serial2
+//TX2,RX2 -> serial3
