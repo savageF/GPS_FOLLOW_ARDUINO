@@ -1,6 +1,13 @@
 #define R 6371
 #define TO_RAD (3.1415926536 / 180)
-#include <math.h>
+// must include this ->>> #include <math.h>
+//                        #include <Distance_eom.h>
+
+
+double get_dist(double th1, double ph1, double th2 , double ph2);
+double get_bear(double th1, double ph1 , double th2 , double ph2);
+
+/* !!!!!!!!!!!!!!!! this is main(body)code !!!!!!!!!!!!!!!!!!!!!!!! 
 
 // getting distance 
 double get_dist(double th1, double ph1, double th2, double ph2)
@@ -32,3 +39,4 @@ double get_bear(double th1, double ph1, double th2, double ph2) {
 	return brng;
 
 }
+*/
