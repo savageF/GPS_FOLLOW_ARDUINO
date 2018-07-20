@@ -6,4 +6,7 @@
 
 07-18-18 how to get distance between A and B [https://forum.arduino.cc/index.php?topic=515992.0] use this algorithm
 
-07-18-18 uart_mega_communication system code , using touch sensor turn off all auto movement [needed some rewrite]
+07-18-18 uart_mega_communication system code , using touch sensor to turn off all auto movement [needed some rewrite]
+
+07-20-18 Bearing and Distance header upload [ref https://www.movable-type.co.uk/scripts/latlong.html] use this ref
+
