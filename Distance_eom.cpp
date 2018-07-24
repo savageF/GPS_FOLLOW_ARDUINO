@@ -33,6 +33,6 @@ double get_bear(double la1, double lo1, double la2, double lo2) {
 		sin(rlat1) * cos(rlat2) * cos(rlon2 - rlon1);
 	double brng = atan2(y, x) * (180 / 3.1415926536);
 
-	return brng; // Clockwise if u want to change this -> 360 - brng 
+	return brng+360; // Clockwise if u want to change this -> 360 - brng 
 
 }
