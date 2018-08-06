@@ -1,46 +1,40 @@
 
-#include <SoftwareSerial.h>
-#include <RH_ASK.h>
-// Include dependant SPI Library 
-#include <SPI.h> 
 #include <TinyGPS.h>
-
-// D12 <-- CONNECTING 
-// Create Amplitude Shift Keying Object
-RH_ASK rf_driver;
-// rx , tx .. follow order
-SoftwareSerial ss(15,14);
+#include <VirtualWire.h>
 TinyGPS gps;
+boolean validGPS = false;
 
+struct {
+  float flat1;
+  float flon1;
+}DATA;
 
 void setup()
 {
-    // Initialize ASK Object
-    ss.begin(9600);
-    rf_driver.init();
-    Serial.begin(9600);
+  
+  Serial1.begin(9600); 
+  Serial.begin(9600);
+  vw_setup(2000);
+  vw_set_tx_pin(12);
 }
- 
+
+float flat,flon;
+
 void loop()
 {
-    float latitude, longitude;
-    gps.f_get_position(&latitude, &longitude);
-    //const char *msg = "Welcome to the Workshop!";
-    //rf_driver.send((uint8_t *)msg, strlen(msg));
-    //rf_driver.waitPacketSent();
-
-    // Parsing 
-    String str_latitude = String(latitude);
-    String str_longitude = String(longitude);
-    String str_out = str_latitude + " // " + str_longitude ;
-    static char *msg = str_out.c_str();
-
-    rf_driver.send( (uint8_t *)msg , strlen(msg) );
-    rf_driver.waitPacketSent();
-
+  if (Serial1.available())
+  {
+    validGPS = gps.encode(Serial1.read());
+  }
+  if (validGPS)
+  {
+    gps.f_get_position(&flat, &flon);
+    DATA.flat1 = flat;
+    DATA.flon1 = flon;
+    Serial.println(DATA.flat1);
+    Serial.println(DATA.flon1);
     
-
-
-    delay(1000);
+    vw_send((uint8_t*)&DATA , sizeof(DATA));
+    vw_wait_tx();
+  }
 }
-
