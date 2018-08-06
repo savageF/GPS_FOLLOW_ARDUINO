@@ -10,3 +10,5 @@
 
 07-20-18 Bearing and Distance header upload [ref https://www.movable-type.co.uk/scripts/latlong.html] use this ref
 
+08-06-18 Final ver Arduino follow by GPS 
+         ref RF_receiver / RF_transmitter
