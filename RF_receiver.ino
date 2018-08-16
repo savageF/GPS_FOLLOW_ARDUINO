@@ -13,8 +13,8 @@ TinyGPS gps;
 boolean validGPS = false;
 void setup()
 {
-  Serial1.begin(9600);
-  Serial.begin(115200);
+  Serial2.begin(9600);
+  Serial.begin(9600);
   vw_setup(2000);
   vw_set_rx_pin(11);
   vw_rx_start();
@@ -29,9 +29,9 @@ void loop()
 
   if (vw_get_message(buf, &buflen)) 
   {
-       if (Serial1.available())
+       if (Serial2.available())
        {
-          validGPS = gps.encode(Serial1.read());
+          validGPS = gps.encode(Serial2.read());
        }
        if (validGPS)
        {
@@ -43,17 +43,21 @@ void loop()
     Serial.println(DataIn->X);
     Serial.println(DataIn->Y);
 
+    Serial.println("위도 와 경도2");
+    Serial.println(flat);
+    Serial.println(flon);
+
     Serial.println();
     Serial.println("대상 까지의 거리");
-    Serial.print(get_dist(flat,flon,(double)DataIn->X , (double)DataIn->Y) * 1000);
+    Serial.print(get_dist((double)flat,(double)flon,(double)DataIn->X , (double)DataIn->Y) * 1000);
     Serial.print(" Meter");
 
     Serial.println();
     Serial.println("대상에 대한 각");
-    Serial.print(get_bear(flat,flon,(double)DataIn->X , (double)DataIn->Y) - 360);
+    Serial.print(get_bear((double)flat,(double)flon,(double)DataIn->X , (double)DataIn->Y) - 360);
     Serial.print(" deg");
     Serial.println();
    
-    delay(5000);
+    delay(500);
   }
 }
