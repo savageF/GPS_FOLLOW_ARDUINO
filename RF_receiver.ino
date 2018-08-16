@@ -9,7 +9,8 @@ struct DATA{
 };
 
 struct DATA *DataIn;
-
+TinyGPS gps;
+boolean validGPS = false;
 void setup()
 {
   Serial1.begin(9600);
